@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Text Summarizer</title>
+</head>
+<body>
+    <h1>Document Summarizer</h1>
+    <textarea id="text-input" rows="10" cols="80" placeholder="Paste your text here..."></textarea><br>
+    <button onclick="summarize()">Summarize</button>
+    <h2>Summary:</h2>
+    <p id="summary-output"></p>
+
+    <script>
+        async function summarize() {
+            const text = document.getElementById("text-input").value;
+
+            const response = await fetch("/summarize", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ text: text })
+            });
+
+            if (response.ok) {
+                const data = await response.json();
+                document.getElementById("summary-output").textContent = data.summary;
+            } else {
+                document.getElementById("summary-output").textContent = "Error summarizing text.";
+            }
+        }
+    </script>
+</body>
+</html>

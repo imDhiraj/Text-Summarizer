@@ -1,0 +1,10 @@
+services:
+  - type: web
+    name: doc-summarizer
+    runtime: python
+    buildCommand: ""
+    startCommand: uvicorn app.main:app --host 0.0.0.0 --port 10000
+    envVars:
+      - key: TRANSFORMERS_CACHE
+        value: /mnt/data/cache
+    plan: free
