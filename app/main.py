@@ -5,7 +5,7 @@ import os
 
 app = FastAPI()
 
-# Include your API routes
+#API routes
 app.include_router(router)
 
 # Serve static frontend files
