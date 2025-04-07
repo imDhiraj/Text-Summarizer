@@ -9,7 +9,7 @@ A simple web application that summarizes long paragraphs of text using a powerfu
 - Accepts raw text input from the user.
 - Uses pre-trained BART model to generate a concise summary.
 - Fast and lightweight web app.
-- Deployable to platforms like Render or Railway.
+
 
 ---
 
@@ -29,7 +29,7 @@ A simple web application that summarizes long paragraphs of text using a powerfu
 - **Backend**: FastAPI
 - **Model**: HuggingFace Transformers (`facebook/bart-large-cnn`)
 - **Frontend**: HTML, JavaScript
-- **Deployment Ready**: Render
+
 
 ---
 
