@@ -1,13 +1,25 @@
-from transformers import pipeline
+import os
+import requests
+from dotenv import load_dotenv
 
-summarizer_pipeline = pipeline("summarization", model="facebook/bart-large-cnn")
+# Load environment variables
+load_dotenv()
+
+# Get API token and URL from environment variables
+API_TOKEN = os.getenv("Hugging_Face_Token")
+API_URL = os.getenv("Hugging_Face_URL")
 
 def summarize_text(text: str) -> str:
-    # Adjust max_length and min_length to get a richer summary
-    summary = summarizer_pipeline(
-        text, 
-        max_length=200,   # 200–300 longer summaries
-        min_length=80,    # 80 for more meaningful content
-        do_sample=False
-    )
-    return summary[0]['summary_text']
+    headers = {"Authorization": f"Bearer {API_TOKEN}"}
+    
+    try:
+        response = requests.post(API_URL, headers=headers, json={"inputs": text})
+        response.raise_for_status()  # Raise an exception for bad status codes
+        
+        # Extract the summary from the response
+        summary = response.json()[0]["summary_text"]
+        return summary
+    
+    except requests.exceptions.RequestException as e:
+        print(f"Error calling Hugging Face API: {e}")
+        return "Error generating summary. Please try again."
