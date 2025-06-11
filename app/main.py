@@ -10,7 +10,7 @@ app.include_router(router)
 
 @app.get("/favicon.ico")
 async def get_favicon():
-    with open("static/favicon.png", "rb") as f:
+    with open("static/favicon.ico", "rb") as f:
         favicon = f.read()
     return Response(favicon, media_type="image/x-icon")
 
